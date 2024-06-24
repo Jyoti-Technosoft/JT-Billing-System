@@ -1,0 +1,172 @@
+.add-invoice-form {
+  max-width: 600px;
+  width: 90%;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #F9F9F9;
+  border-radius: 20px; /* Add curved corners */
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* Ensure relative positioning for absolute elements */
+}
+/* Styles for the submit button */
+.add-invoice-form button[type="submit"] {
+  background-color: lightgray; /* Purple color */
+  color: white; /* White text color */
+  padding: 1rem 2rem; /* Increased padding */
+  border: none;
+  border-radius: 10px; /* Add curved corners */
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.add-invoice-form button[type="submit"]:hover {
+  background-color: lightblue; /* Darker purple on hover */
+  box-shadow: 0 0 10px rgba(23, 18, 18, 0.4);
+  transform: scale(1.1);
+}
+.modal-close-button {
+  position: absolute;
+  top: 80px; /* Adjusted to be inside the box */
+  right: 78px; /* Adjusted to be inside the box */
+  font-size: 1.5rem; /* Adjusted font size */
+  cursor: pointer;
+  color: black; /* Black color */
+  padding: 0.3rem 0.5rem; /* Adjusted padding */
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+  border-radius: 20%; /* Make the button circular */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+  transition: transform 0.3s ease; /* Add transition effect to the close button */
+  z-index: 1001; /* Ensure the close button is above the modal content */
+  border: none; /* Remove border */
+}
+.modal-close-button:hover {
+  transform: scale(1.1); /* Scale up the button on hover */
+}
+.modal-close-button:focus {
+  outline: none; /* Remove outline */
+}
+/* Styles for text fields in the invoice form */
+.add-invoice-form .MuiTextField-root {
+  margin-bottom: 20px;
+}
+/* Styles for buttons in the invoice form */
+.add-invoice-form .MuiButton-root {
+  margin-top: 20px;
+}
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8); /* Darker semi-transparent black backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease; /* Add transition effect */
+  backdrop-filter: blur(5px); /* Add blur effect to the backdrop */
+}
+/* Modal Content */
+.modal-content {
+  padding: 50px;
+  max-width: 90%;
+  width: 600px;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  animation: fadeIn 0.3s ease forwards;
+  transform: scale(0.9); /* Initial scale */
+  transition: transform 0.3s ease; /* Add transition effect */
+  overflow: hidden; /* Add overflow hidden to prevent content from overflowing */
+}
+.modal-content.show {
+  transform: scale(1); /* Scale up on show */
+}
+/* Modal Header */
+.modal-header {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #fff; /* White text color */
+  margin-bottom: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+  position: relative; /* Add relative positioning to the header */
+  background: linear-gradient(to bottom, #6821C3, #5A1C9E); /* Gradient background */
+  border-radius: 20px 20px 0 0; /* Rounded corners */
+}
+/* Modal Body */
+.modal-body {
+  font-size: 1.4rem;
+}
+/* Styles for the customer form box */
+.customer-form {
+  position: relative; /* Ensure relative positioning for absolute elements */
+}
+/* Styles for the submit button inside the customer form */
+.customer-form button[type="submit"] {
+  background-color: lightgray; /* Purple color */
+  color: white; /* White text color */
+  padding: 1rem 2rem; /* Increased padding */
+  border: none;
+  border-radius: 10px; /* Add curved corners */
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: absolute; /* Position the button */
+  right: 20px; /* Adjusted to be inside the box and at the right */
+  bottom: 20px; /* Adjusted to be inside the box and at the bottom */
+}
+.customer-form button[type="submit"]:hover {
+  background-color: lightblue; /* Darker purple on hover */
+  box-shadow: 0 0 10px rgba(23, 18, 18, 0.4);
+  transform: scale(1.1);
+}
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+input[type="text"],
+input[type="email"],
+select {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  height: 3rem; /* Increase height to match the state field */
+  box-sizing: border-box;
+}
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+.form-container {
+  position: relative;
+}
+/* Responsive styling */
+@media (max-width: 500px) {
+  .modal-content {
+    width: 90%;
+  }
+}
+@media (max-width: 300px) {
+  .modal-content {
+    width: 80%;
+  }
+}

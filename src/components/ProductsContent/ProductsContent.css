@@ -1,0 +1,54 @@
+.products {
+  padding: 18px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #E1F5FE;
+  border: 1px solid black;
+}
+.products .MuiBox-root {
+  margin-bottom: 16px;
+}
+.products .MuiTypography-root {
+  display: flex;
+  align-items: center;
+}
+.products .MuiButton-root {
+  color: black;
+  background-color: lightblue;
+  padding: 8px 16px;
+}
+.products .MuiTableContainer-root {
+  margin-top: 1rem;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: 30rem; /* This might be a typo, 30rem is a very large margin, please adjust accordingly */
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 600px;
+}
+.search-box .MuiTextField-root {
+  flex: 1;
+  border: none;
+  padding: 0 8px;
+}
+.search-box .MuiTextField-root .MuiInputBase-input {
+  border-radius: 4px 0 0 4px;
+}
+.search-box .MuiButton-root {
+  color: black;
+  background: lightblue;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  min-width: 80px;
+}
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+}

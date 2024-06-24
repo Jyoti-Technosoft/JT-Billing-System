@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: lightgray;
+    border-top: 1px solid red;
+  }
+  
+  .header__logo {
+    margin-right: 20px;
+  }
+  
+  .header__logo img {
+    width: 100px; 
+  }
+  
+  .header__title {
+    text-align: center;
+  }
+  
+  .header__title h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .header__title h2 {
+    font-size: 18px;
+  }

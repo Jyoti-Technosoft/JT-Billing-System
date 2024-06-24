@@ -1,0 +1,46 @@
+.sidebar {
+  position: fixed;
+  top: 0px; /* Adjust based on the height of your header */
+  left: 0;
+  width: 200px;
+  height: calc(100% - 10px); /* Adjust based on the height of your header */
+  background-color: white;
+  color: white;
+  padding: 10px;
+}
+.sidebar-header {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  display: block;
+  padding: 10px;
+  background-color: #fff;
+  
+  color: #333;
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background-color: rgb(185, 188, 190);
+  color: black;
+  font-weight: bold;
+}
