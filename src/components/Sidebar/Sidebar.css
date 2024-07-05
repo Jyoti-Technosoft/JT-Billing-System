@@ -1,46 +1,77 @@
 .sidebar {
   position: fixed;
-  top: 0px; /* Adjust based on the height of your header */
-  left: 0;
-  width: 200px;
-  height: calc(100% - 10px); /* Adjust based on the height of your header */
-  background-color: white;
-  color: white;
-  padding: 10px;
+  top: 0%;
+  left: 0%;
+  width: 20%;
+  height: calc(100% - 1%);
+  background-color: rgb(18, 30, 46); /* Blue background */
+  color: #fff; /* White text color */
+  padding: 1%;
+  font-family:  Arial;
+  align-items: center;
+  
 }
+
 .sidebar-header {
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 2%;
+  padding-bottom: 7%;
   font-size: 1.2rem;
+  
 }
 
 .sidebar-header h2 {
   margin: 0;
-  color: #333;
+  color: #9CC31C; /* Light green color for the header text */
   font-size: 1.2rem;
+  
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
+  
 }
 
 .sidebar ul li {
-  margin-bottom: 10px;
+  margin-bottom: 5%;
+  
 }
 
 .sidebar ul li a {
   display: block;
-  padding: 10px;
-  background-color: #fff;
-  
-  color: #333;
+  padding: 5%;
+  background-color: rgb(11, 23, 39); /* Blue background */
+  color: #fff; /* White text color */
   text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease, border-left 0.3s ease;
+  
 }
 
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
-  background-color: rgb(185, 188, 190);
-  color: black;
+  background-color: rgb(20, 40, 64); /* Light green background for hover and active states */
+  color: #fff; /* White text color */
   font-weight: bold;
+  border-left: 6px solid rgb(175, 189, 13);
+}
+.company-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+}
+
+.company-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.company-name {
+  font-size: 18px;
+  margin: 0;
+}
+
+.company-tagline {
+  font-size: 12px;
+  margin: 0;
+  color: #777777;
 }

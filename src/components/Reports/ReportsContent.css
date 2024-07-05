@@ -1,0 +1,50 @@
+.main-content {
+  padding: 20px;
+  background-color: #f4f6f8;
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.date-range-picker {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.charts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pie-chart, .bar-chart {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.profit-loss, .daily-sales, .product-sales {
+  margin-top: 20px;
+}
+
+.product-sales {
+  margin-bottom: 20px;
+}
+.chart-paper {
+  height: 650px; /* Adjust height as needed */
+  padding: 20px; /* Optional: Add padding for spacing */
+}
+.pie-chart, .bar-chart {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.pie-chart:hover, .bar-chart:hover {
+  transform: translateY(-5px);
+}

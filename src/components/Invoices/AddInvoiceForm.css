@@ -1,0 +1,82 @@
+.invoice {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: white;
+  
+}
+.head{
+  
+  color: black;
+  border: 0px solid white;
+  background-color: lightblue;
+  
+}
+.input-container {
+  width: 100%;
+  padding: 1%;
+  font-size: 18px;
+}
+.input-container label {
+  display: block;
+  
+}
+.input-container select,
+.input-container input {
+  width: 30%;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+  
+}
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(173, 216, 230);
+  color: rgb(31, 103, 229);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.download-pdf {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #28A745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.invoices-container {
+  margin-top: 20px;
+}
+.invoice {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.invoice h2 {
+  margin-top: 0;
+}
+.invoice p {
+  margin: 5px 0;
+}
+.invoice table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.invoice table th,
+.invoice table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+.invoice table th {
+  background-color: #F2F2F2;
+}
+.invoice table td {
+  text-align: center;
+}

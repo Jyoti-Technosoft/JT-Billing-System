@@ -1,0 +1,16 @@
+.quickbilling {
+    
+    padding: 18px;
+    margin-left: 20px;
+    margin-right: 20px;
+  
+    background-color: rgb(20, 40, 64);
+    
+    border-radius: 20px;
+    color: rgb(31, 103, 229);
+  }
+  .quickbilling .MuiButton-root {
+    color: black;
+    background-color: lightblue;
+    padding: 8px 16px;
+  }

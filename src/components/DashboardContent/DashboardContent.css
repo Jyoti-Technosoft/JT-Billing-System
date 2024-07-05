@@ -4,53 +4,62 @@
 
 .latest-invoices h4, .top-customers h4 {
   font-size: 1.5rem;
-  
+  color: rgb(31, 103, 229);
+ 
 }
 
 .MuiTableContainer-root {
   background-color: #E3F2FD;
   margin-top: 1rem;
-  
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .MuiTable-root {
   min-width: 650px;
+  border: 1px solid white;
 }
 
 .MuiTableCell-root {
   font-size: 2rem;
   padding: 16px;
+  
 }
 
 .MuiTableHead-root .MuiTableCell-root {
-  border: 1px solid black;
-  background-color: #c0d7fa;
+  background-color: rgb(20, 40, 64);
+  color: white;
+  font-weight: bold;
 }
 
 .MuiTableBody-root .MuiTableRow-root:nth-of-type(odd) {
-  border: 1px solid black;
-  background-color: #c0d7fa;
+  
+  background-color: rgb(24, 47, 73);
+  
 }
 
 .MuiTableBody-root .MuiTableRow-root:nth-of-type(even) {
-  border: 1px solid black;
-  background-color: #c0d7fa;
+  
+  background-color: rgb(24, 47, 73);
+  
 }
 
 .MuiTableBody-root .MuiTableCell-root {
-  border: 1px solid black;
-  background-color: #c0d7fa;
+  
+  background-color: rgb(24, 47, 73);
+  color: white;
 }
 
 .latest-invoices{
-  border: 1px solid black;
-  background-color: #E1F5FE;
+  border-radius: 10px;
+  background-color: rgb(18, 30, 46);
   margin: 20px;
+  font-family: Arial;
+  
 }
 .top-customers{
-  border: 1px solid black;
-  background-color: #E1F5FE;
+  border-radius: 10px;
+  background-color: rgb(18, 30, 46);
   margin: 20px;
   padding: 20px;
+  font-family: Arial;
 }
