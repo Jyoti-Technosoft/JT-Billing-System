@@ -46,6 +46,29 @@ const AddInvoiceForm = ({ onClose,invoiceToEdit, onEditComplete }) => {
   const [currentInvoice, setCurrentInvoice] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
 
+  const taxOptions = [
+    { label: 'IGST- 18%', value: 18 },
+    { label: 'GST - 18%', value: 18 },
+    { label: 'GST - 10%', value: 10 },
+    { label: 'VAT - 12%', value: 12 },
+    { label: 'Service Tax - 5%', value: 5 },
+    { label: 'IGST- 0%', value: 0 },
+    { label: 'GST - 0%', value: 0 },
+    { label: 'IGST- 0.25%', value: 0.25 },
+    { label: 'GST - 0.25%', value: 0.25 },
+    { label: 'IGST- 3%', value: 3 },
+    { label: 'GST - 3%', value: 3 },
+    { label: 'IGST- 5%', value: 5 },
+    { label: 'GST - 5%', value: 5 },
+    { label: 'IGST- 12%', value: 12 },
+    { label: 'GST - 12%', value: 12 },
+    { label: 'IGST- 28%', value: 28 },
+    { label: 'GST - 28%', value: 28 },
+    // Add more options as needed
+  ];
+  
+
+
   const handleAddNewCustomer = (customerData) => {
     setCustomers([...customers, customerData]);
     setCustomerName(customerData);
@@ -296,8 +319,17 @@ const AddInvoiceForm = ({ onClose,invoiceToEdit, onEditComplete }) => {
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
+  const modalContentStyle = {
+    width: '100%',
+    fontFamily: "'Poppins', sans-serif",
+    position: 'relative',
+    transform: 'scale(0.9)', // Initial scale
+    transition: 'transform 0.3s ease', // Add transition effect
+    overflow: 'hidden' // Add overflow hidden to prevent content from overflowing
+  };
 
   return  (
+    <div style={modalContentStyle}>
     <form className="invoice" style={{ p: 4, bgcolor: 'white', boxShadow: 3, maxHeight: "800px", overflowY: "auto" }}>
       <div className="head">
         
@@ -340,11 +372,9 @@ const AddInvoiceForm = ({ onClose,invoiceToEdit, onEditComplete }) => {
           </li>
         )}
       />
-      <Dialog open={open} onClose={handleClose}>
-        
-          <AddCustomerForm onClose={handleClose} onSubmit={handleAddNewCustomer} initialData={null} />
-        
-      </Dialog>
+     <Dialog open={open} onClose={handleClose} PaperProps={{ style: { backgroundColor: 'transparent', boxShadow: 'none' } }}>
+  <AddCustomerForm onClose={handleClose} onSubmit={handleAddNewCustomer} initialData={null} />
+</Dialog>
         </div>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -473,17 +503,27 @@ const AddInvoiceForm = ({ onClose,invoiceToEdit, onEditComplete }) => {
         <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
         <div>
-        <Box style={{ height: '55px'}}>
+        <Grid container spacing={2}>
+      <Grid item xs={12} sm={6}>
+      <Box style={{ height: '55px' }}>
           <label>Tax Rate (%) :</label>
-          <input
-            type="number"
-            value={taxRate}
-            style={{ width: '100%', height: '100%' }}
-            onChange={(e) => setTaxRate(parseFloat(e.target.value))}
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={taxOptions}
+            sx={{ width: '204%' }}
+            renderInput={(params) => <TextField {...params} label="Select Tax" />}
+            onChange={(event, newValue) => {
+              if (newValue) {
+                setTaxRate(newValue.value);
+              }
+            }}
           />
-          </Box>
-        </div>
-        </Grid>
+        </Box>
+      </Grid>
+    </Grid>
+    </div>
+    </Grid>
         <Grid item xs={12} sm={6}>
         <div >
         <Box style={{ height: '55px'}}>
@@ -509,13 +549,13 @@ const AddInvoiceForm = ({ onClose,invoiceToEdit, onEditComplete }) => {
           <div>
             <label>Product Price:</label>
           <input
-   	   style={{ width: '100%' }}
-    	   type="text"
-    	   id="price"
-    	   value={productName.price * (1 + productName.sellingPricePercentage / 100).toFixed(2)}
-    	   onChange={(e) => {
-    		}}
- 	   />
+       style={{ width: '100%' }}
+         type="text"
+         id="price"
+         value={productName.price * (1 + productName.sellingPricePercentage / 100).toFixed(2)}
+         onChange={(e) => {
+        }}
+     />
           </div>
             )}
             </Grid>
@@ -524,13 +564,13 @@ const AddInvoiceForm = ({ onClose,invoiceToEdit, onEditComplete }) => {
           <div >
             <label>Available Quantity:</label>
           <input
-   	   style={{ width: '100%' }}
-    	   type="text"
-    	   id="quntity"
-    	   value={availableQuantity}
-    	   onChange={(e) => {
-    		}}
- 	   />
+       style={{ width: '100%' }}
+         type="text"
+         id="quntity"
+         value={availableQuantity}
+         onChange={(e) => {
+        }}
+     />
           </div> 
           )}</Grid></Grid>
       </div>
@@ -573,7 +613,7 @@ const AddInvoiceForm = ({ onClose,invoiceToEdit, onEditComplete }) => {
                       <td>{(item.quantity * item.price).toFixed(2)}/-</td>
                       <td>
                       <IconButton onClick={() => handleDeleteItem(index)} aria-label="delete">
-        <DeleteForeverIcon />
+    <DeleteForeverIcon />
       </IconButton>
                       </td>
                     </tr>
@@ -663,6 +703,7 @@ const AddInvoiceForm = ({ onClose,invoiceToEdit, onEditComplete }) => {
       </Snackbar>
       </div>
     </form>
+    </div>
   );
 };
 

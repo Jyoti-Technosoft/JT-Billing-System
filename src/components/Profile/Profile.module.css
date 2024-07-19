@@ -1,0 +1,89 @@
+/* Profile.module.css */
+.container {
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .container:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .heading {
+    font-size: 2.5em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .hr {
+    border: 1px solid #ecf0f1;
+    margin-bottom: 20px;
+  }
+  
+  .subHeading {
+    font-size: 1.75em;
+    color: #34495e;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  
+  .profileForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .profileField {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f7f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  
+  .profileField:hover {
+    background-color: #e9ecef;
+  }
+  
+  .label {
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+    margin-right: 12px;
+  }
+  
+  .value {
+    color: #666;
+    flex: 2;
+  }
+  
+  .emailLabel {
+    font-size: 1.00em;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .emailValue {
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .editEmailInput {
+    flex: 2;
+  }
+  
+  .editButton {
+    margin-left: 10px;
+  }
+  
+ 

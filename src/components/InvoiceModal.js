@@ -8,7 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import { BiCloudDownload } from "react-icons/bi";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-
+import './InvoiceModal.css'
 const GenerateInvoice = () => {
   html2canvas(document.querySelector("#invoiceCapture")).then((canvas) => {
     const imgData = canvas.toDataURL("image/png", 1.0);
@@ -25,7 +25,6 @@ const GenerateInvoice = () => {
     pdf.save("invoice-001.pdf");
   });
 };
-
 const InvoiceModal = ({
   showModal,
   closeModal,
@@ -178,9 +177,19 @@ const InvoiceModal = ({
           </Row>
         </div>
       </Modal>
-      
     </div>
   );
 };
-
 export default InvoiceModal;
+
+
+
+
+
+
+
+
+
+
+
+

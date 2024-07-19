@@ -10,7 +10,6 @@ import {
   FormControl,
   InputLabel
 } from '@mui/material';
-
 const AddProductForm = ({ onClose, onSubmit, initialData }) => {
   const [productName, setProductName] = useState(initialData ? initialData.name : '');
   const [price, setPrice] = useState(initialData ? initialData.price.toString() : '');
@@ -26,7 +25,6 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
   const [categoryError, setCategoryError] = useState('');
   const [formError, setFormError] = useState('');
   const [productAdded, setProductAdded] = useState(false);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateInputs()) {
@@ -52,7 +50,6 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
     setProductAdded(true);
     resetFormFields();
   };
-
   const validateInputs = () => {
     let isValid = true;
     if (!productName) {
@@ -99,7 +96,6 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
     }
     return isValid;
   };
-
   const resetFormFields = () => {
     setProductName('');
     setPrice('');
@@ -116,12 +112,20 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
     setFormError('');
     setProductAdded(false);
   };
-
+  const modalContentStyle = {
+    width: '100%',
+    fontFamily: "'Poppins', sans-serif",
+    position: 'relative',
+    transform: 'scale(0.9)', // Initial scale
+    transition: 'transform 0.3s ease', // Add transition effect
+    overflow: 'hidden' // Add overflow hidden to prevent content from overflowing
+  };
   return (
+    <div style={modalContentStyle}>
     <Paper elevation={4} sx={{ p: 4, bgcolor: 'background.paper', borderRadius: 4, boxShadow: 3 }}>
       <Typography variant="h4" component="h2" gutterBottom>
         {initialData ? "Edit Product" : "Add New Product"}
-      </Typography>
+      </Typography><hr/>
       {formError && <Typography color="error">{formError}</Typography>}
       {productAdded && <Typography color="success">Product added successfully!</Typography>}
       <form onSubmit={handleSubmit}>
@@ -137,6 +141,13 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
               required
               error={!!productNameError}
               helperText={productNameError}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -150,6 +161,13 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
               required
               error={!!priceError}
               helperText={priceError}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -163,6 +181,13 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
               required
               error={!!totalPurchaseError}
               helperText={totalPurchaseError}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -176,6 +201,13 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
               required
               error={!!sellingPricePercentageError}
               helperText={sellingPricePercentageError}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -211,7 +243,7 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
                 <MenuItem value="other">OTHERS</MenuItem>
               </Select>
               {unitError && <Typography color="error">{unitError}</Typography>}
-            </FormControl>
+            </FormControl><hr/>
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth required error={!!categoryError}>
@@ -228,14 +260,13 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
                 <MenuItem value="groceries">Groceries</MenuItem>
               </Select>
               {categoryError && <Typography color="error">{categoryError}</Typography>}
-            </FormControl>
+            </FormControl><hr/>
           </Grid>
           <Grid container justifyContent="flex-end" spacing={2} sx={{paddingTop:"20px"  }}>
   <Grid item>
     <Button
       type="submit"
       variant="contained"
-      
     >
       {initialData ? 'Update' : 'Submit'}
     </Button>
@@ -249,7 +280,14 @@ const AddProductForm = ({ onClose, onSubmit, initialData }) => {
         </Grid>
       </form>
     </Paper>
+    </div>
   );
 };
-
 export default AddProductForm;
+
+
+
+
+
+
+

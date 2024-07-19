@@ -19,6 +19,15 @@
   
 }
 
+
+.sidebar-logo {
+  width: 100%; /* Adjust size as needed */
+  height: 50px; /* Adjust size as needed */
+   /* Makes the logo round, adjust as needed */
+  margin-right: 10px; /* Example margin */
+  border-bottom: 1.5px solid rgb(11, 23, 39);
+}
+
 .sidebar-header h2 {
   margin: 0;
   color: #9CC31C; /* Light green color for the header text */
@@ -52,6 +61,7 @@
   background-color: rgb(20, 40, 64); /* Light green background for hover and active states */
   color: #fff; /* White text color */
   font-weight: bold;
+ 
   border-left: 6px solid rgb(175, 189, 13);
 }
 .company-logo {

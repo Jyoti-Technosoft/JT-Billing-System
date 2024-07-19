@@ -1,0 +1,100 @@
+/* Base.module.css */
+
+
+.login {
+  width: 400px;
+  background: white;
+  border: 1px solid #dddfe2;
+  box-shadow: 0 2px 4px rgb(0 0 10 / 64%), 0 8px 16px rgb(0 10 0 / 34%);
+  border-radius: 8px;
+  padding: 1rem;
+  align-items: center;
+  text-align: center;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.login > form input {
+  border-radius: 20px;
+  border: 2px solid lightgrey;
+  outline: none;
+  color: #1d2129;
+  margin: 2% 0;
+  width: 90%;
+  padding: 12px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login > form input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}
+
+.password_container {
+  position: relative;
+  width: 99%;
+  margin: 2% 0;
+  right: 6%;
+}
+
+.password_toggle {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.password_container input {
+  padding-right: 50px; /* Adjust padding for the eye icon */
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.button_common {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button_common:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.button_common:active {
+  transform: translateY(1px);
+}
+
+.button_hover:hover {
+  background-color: #0056b3;
+}

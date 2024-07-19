@@ -10,7 +10,6 @@ import {
   Grid,
   Paper
 } from '@mui/material';
-
 const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -21,16 +20,23 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
   const [cityError] = useState('');
   const [formError, setFormError] = useState('');
   const [customerAdded, setCustomerAdded] = useState(false);
-
+  const [gstNumber, setGstNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [address, setAddress] = useState('');
+  const [email, setEmail] = useState('');
   useEffect(() => {
     if (initialData) {
       setFirstName(initialData.firstName || '');
       setLastName(initialData.lastName || '');
       setCity(initialData.city || '');
       setState(initialData.state || '');
+      // Additional fields
+      setGstNumber(initialData.gstNumber || '');
+      setPhoneNumber(initialData.phoneNumber || '');
+      setAddress(initialData.address || '');
+      setEmail(initialData.email || '');
     }
   }, [initialData]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateInputs()) {
@@ -43,12 +49,16 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
       lastName,
       city,
       state,
+      // Additional fields
+      gstNumber,
+      phoneNumber,
+      address,
+      email,
     };
     onSubmit(customerData);
     setCustomerAdded(true);
     resetFormFields();
   };
-
   const validateInputs = () => {
     let isValid = true;
     if (!/^[a-zA-Z]+$/.test(firstName)) {
@@ -71,27 +81,40 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
     }
     return isValid;
   };
-
   const resetFormFields = () => {
     setFirstName('');
     setLastName('');
     setCity('');
     setState('');
+    // Additional fields
+    setGstNumber('');
+    setPhoneNumber('');
+    setAddress('');
+    setEmail('');
   };
-
+  const modalContentStyle = {
+    width: '100%',
+    fontFamily: "'Poppins', sans-serif",
+    position: 'relative',
+    transform: 'scale(0.9)', // Initial scale
+    transition: 'transform 0.3s ease', // Add transition effect
+    overflow: 'hidden' // Add overflow hidden to prevent content from overflowing
+  };
   return (
-    <Paper elevation={4} sx={{ p: 4, bgcolor: 'background.paper', borderRadius: 4, boxShadow: 3, maxWidth: 600, width: '90%' }}>
+    <div style={modalContentStyle}>
+    <Paper elevation={4} sx={{ p: 4, bgcolor: 'white', borderRadius: 4, boxShadow: 3 }}>
       <Typography variant="h4" component="h2" gutterBottom>
         {initialData ? 'Edit Customer' : 'Add New Customer'}
       </Typography>
+      <hr/>
       {formError && <Typography color="error">{formError}</Typography>}
       {customerAdded && <Typography color="success">Customer added successfully!</Typography>}
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <TextField
+          <TextField
               fullWidth
-              id="first-name"
+              id="outlined-multiline-flexible"
               label="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -99,12 +122,19 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
               required
               error={!!firstNameError}
               helperText={firstNameError}
+              sx={{
+                      '& .MuiOutlinedInput-root': {
+                      '& input': {
+                      border: 'none',
+                        },
+                      },
+                  }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              id="last-name"
+              id="outlined-multiline-flexible"
               label="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -112,7 +142,34 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
               required
               error={!!lastNameError}
               helperText={lastNameError}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
             />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <InputLabel id="state-label">State</InputLabel>
+              <Select
+                labelId="state-label"
+                id="state"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                label="State"
+                variant="outlined"
+                required
+              >
+                <MenuItem value=""><em>Choose...</em></MenuItem>
+                <MenuItem value="Gujarat">Gujarat</MenuItem>
+                <MenuItem value="Maharashtra">Maharashtra</MenuItem>
+                <MenuItem value="Kerala">Kerala</MenuItem>
+                <MenuItem value="Rajasthan">Rajasthan</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
@@ -135,40 +192,94 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
               </Select>
             </FormControl>
           </Grid>
+          {/* Additional fields */}
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel id="state-label">State</InputLabel>
-              <Select
-                labelId="state-label"
-                id="state"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-                label="State"
-                variant="outlined"
-                required
-              >
-                <MenuItem value=""><em>Choose...</em></MenuItem>
-                <MenuItem value="Gujarat">Gujarat</MenuItem>
-                <MenuItem value="Maharashtra">Maharashtra</MenuItem>
-                <MenuItem value="Kerala">Kerala</MenuItem>
-                <MenuItem value="Rajasthan">Rajasthan</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={12} xl={2} >
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
+            <TextField
               fullWidth
-            >
-              {initialData ? 'Update' : 'Submit'}
-            </Button>
+              id="gst-number"
+              label="GST Number"
+              value={gstNumber}
+              onChange={(e) => setGstNumber(e.target.value)}
+              variant="outlined"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
+            />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              id="phone-number"
+              label="Phone Number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              variant="outlined"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              id="address"
+              label="Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              variant="outlined"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
+            /><hr/>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              id="email"
+              label="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              variant="outlined"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
+            /> <hr/>
+          </Grid>
+          <Grid container justifyContent="flex-end" spacing={2} sx={{paddingTop:"15px"  }}>
+  <Grid item>
+    <Button
+      type="submit"
+      variant="contained"
+    >
+      {initialData ? 'Update' : 'Submit'}
+    </Button>
+  </Grid>
+  <Grid item>
+    <Button variant="contained" onClick={onClose}>
+      Cancel
+    </Button>
+  </Grid>
+</Grid>
         </Grid>
       </form>
     </Paper>
+    </div>
   );
 };
-
 export default AddCustomerForm;

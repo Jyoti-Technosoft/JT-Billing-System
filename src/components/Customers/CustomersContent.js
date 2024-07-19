@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { IoArrowBack } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
 import AddCustomerForm from './AddCustomerForm';
 import Modal from '../ResuableComponent/Modal';
 import Button from '@mui/material/Button';
@@ -24,20 +22,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import './CustomerContent.css';
 
-
-
 function generateRandomId() {
   const randomId = Math.floor(1000 + Math.random() * 9000); // Generate a random 4-digit number
   return `C-${randomId}`;
 }
 
 function CustomersContent() {
-  const navigate = useNavigate();
-
-  const goBack = () => {
-    navigate('/dashboard');
-  };
-
   const initialCustomers = JSON.parse(localStorage.getItem('customers')) || [
     { id: generateRandomId(), name: 'Customer 1', totalBilled: 0, outstanding: 200, latestBill: '0' },
     { id: generateRandomId(), name: 'Customer 2', totalBilled: 0, outstanding: 100, latestBill: '0' },
@@ -47,12 +37,11 @@ function CustomersContent() {
   ];
 
   const [customers, setCustomers] = useState(initialCustomers);
-  const [invoices ] = useState(JSON.parse(localStorage.getItem('invoices')) || []);
+  const [invoices] = useState(JSON.parse(localStorage.getItem('invoices')) || []);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredCustomers, setFilteredCustomers] = useState(customers);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCustomer, setEditingCustomer] = useState(null);
-  const [deletedCustomers, setDeletedCustomers] = useState([]);
   const [successMessage, setSuccessMessage] = useState('');
   const [deletionMessage, setDeletionMessage] = useState('');
   const [showNoResults, setShowNoResults] = useState(false);
@@ -86,7 +75,7 @@ function CustomersContent() {
   const handleSearch = () => {
     const filtered = customers.filter((customer) =>
       customer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    customer.id.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      customer.id.toString().toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredCustomers(filtered);
     setShowNoResults(filtered.length === 0);
@@ -109,28 +98,33 @@ function CustomersContent() {
   };
 
   const handleFormSubmit = (formData) => {
+    let updatedCustomers = [...customers];
+    let successMsg = '';
+
     if (editingCustomer) {
-      const updatedCustomers = customers.map((customer) =>
+      // Update existing customer
+      updatedCustomers = updatedCustomers.map((customer) =>
         customer.id === formData.id ? { ...customer, ...formData } : customer
       );
-      setCustomers(updatedCustomers);
-      setFilteredCustomers(updatedCustomers);
-      setSuccessMessage(`Customer "${formData.name}" edited successfully!`);
+      successMsg = `Customer "${formData.name}" edited successfully!`;
     } else {
+      // Add new customer
       const newCustomer = {
         ...formData,
         totalBilled: 0,
-        outstanding: 0, // Set outstanding to 0 for new customers
-        latestBill: '0', // Set latestBill to "0" for new customers
+        outstanding: 0,
+        latestBill: '0',
         id: generateRandomId(),
       };
-      const updatedCustomers = [...customers, newCustomer];
-      setCustomers(updatedCustomers);
-      setFilteredCustomers(updatedCustomers);
-      setSuccessMessage(`New customer "${formData.name}" added successfully!`);
+      updatedCustomers.push(newCustomer);
+      successMsg = `New customer "${formData.name}" added successfully!`;
     }
+
+    setCustomers(updatedCustomers);
+    setFilteredCustomers(updatedCustomers);
     setShowAddForm(false);
     setEditingCustomer(null);
+    setSuccessMessage(successMsg);
     setTimeout(() => {
       setSuccessMessage('');
     }, 3000);
@@ -150,7 +144,6 @@ function CustomersContent() {
     const updatedCustomers = customers.filter((customer) => customer.id !== customerToDelete.id);
     setCustomers(updatedCustomers);
     setFilteredCustomers(updatedCustomers);
-    setDeletedCustomers([...deletedCustomers, customerToDelete]);
     setDeletionMessage(`Customer ${customerToDelete.name} deleted successfully!`);
     setConfirmDeletionOpen(false);
     setCustomerToDelete(null);
@@ -166,12 +159,36 @@ function CustomersContent() {
 
   return (
     <div className='customer'>
-      <Box display="flex" alignItems="center" justifyContent="space-between" >
+      <Box display="flex" alignItems="center" justifyContent="space-between">
         <Typography variant="h4">
           <b>&ensp;Customers</b>
         </Typography>
       </Box>
       <hr />
+      {successMessage && (
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          onClose={() => setSuccessMessage('')}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        >
+          <MuiAlert elevation={6} variant="filled" severity="success" onClose={() => setSuccessMessage('')}>
+            {successMessage}
+          </MuiAlert>
+        </Snackbar>
+      )}
+      {deletionMessage && (
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          onClose={() => setDeletionMessage('')}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        >
+          <MuiAlert elevation={6} variant="filled" severity="error" onClose={() => setDeletionMessage('')}>
+            {deletionMessage}
+          </MuiAlert>
+        </Snackbar>
+      )}
       <Box display="flex" alignItems="center" mt={2}>
         <Box className="search-box">
           <TextField
@@ -185,16 +202,29 @@ function CustomersContent() {
               disableUnderline: true,
             }}
           />
-          <Button onClick={handleSearch} variant="contained" style={{
+          <Button
+            onClick={handleSearch}
+            variant="contained"
+            style={{
               background: 'rgb(25, 118, 210)',
               color: 'white',
-            }}>Search</Button>
+            }}
+          >
+            Search
+          </Button>
         </Box>
         <Box className="action-buttons">
-          <Button onClick={handleAddClick} variant="contained" color="primary" style={{
+          <Button
+            onClick={handleAddClick}
+            variant="contained"
+            color="primary"
+            style={{
               background: 'rgb(25, 118, 210)',
               color: 'white',
-            }}>Add</Button>
+            }}
+          >
+            Add
+          </Button>
         </Box>
       </Box>
       {showAddForm && (
@@ -211,8 +241,8 @@ function CustomersContent() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell><b>Customer ID</b></TableCell>
-              <TableCell><b>Customer Name</b></TableCell>
+              <TableCell><b>ID</b></TableCell>
+              <TableCell><b>Name</b></TableCell>
               <TableCell><b>Total Billed</b></TableCell>
               <TableCell><b>Outstanding</b></TableCell>
               <TableCell><b>Latest Bill</b></TableCell>
@@ -224,18 +254,15 @@ function CustomersContent() {
               <TableRow key={customer.id}>
                 <TableCell>{customer.id}</TableCell>
                 <TableCell>{customer.name}</TableCell>
-                <TableCell>{customer.totalBilled}/-</TableCell>
-                <TableCell>{customer.outstanding}/-</TableCell>
+                <TableCell>{customer.totalBilled}</TableCell>
+                <TableCell>{customer.outstanding}</TableCell>
                 <TableCell>{customer.latestBill}</TableCell>
                 <TableCell>
-                  <IconButton onClick={() => handleEditClick(customer)} color="primary" style={{
-              background: 'rgb(25, 118, 210)',
-              color: 'white',
-            }}>
-                    <MdEdit />
+                  <IconButton onClick={() => handleEditClick(customer)}>
+                    <MdEdit style={{ color: 'blue' }} />
                   </IconButton>
-                  <IconButton onClick={() => handleDeleteClick(customer)} style={{ color: 'red' }}>
-                    <MdDeleteForever />
+                  <IconButton onClick={() => handleDeleteClick(customer)}>
+                    <MdDeleteForever style={{ color: 'red' }} />
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -243,48 +270,49 @@ function CustomersContent() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Snackbar
-        open={successMessage !== ''}
-        autoHideDuration={3000}
-        onClose={() => setSuccessMessage('')}
-      >
-        <MuiAlert elevation={6} variant="filled" onClose={() => setSuccessMessage('')} severity="success">
-          {successMessage}
-        </MuiAlert>
-      </Snackbar>
-      <Snackbar
-        open={deletionMessage !== ''}
-        autoHideDuration={3000}
-        onClose={() => setDeletionMessage('')}
-      >
-        <MuiAlert elevation={6} variant="filled" onClose={() => setDeletionMessage('')} severity="error">
-          {deletionMessage}
-        </MuiAlert>
-      </Snackbar>
       <Dialog
         open={confirmDeletionOpen}
         onClose={handleDeleteCancel}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+        aria-labelledby="confirm-deletion-dialog-title"
+        aria-describedby="confirm-deletion-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
+        <DialogTitle id="confirm-deletion-dialog-title">Confirm Deletion</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete {customerToDelete ? customerToDelete.name : 'this customer'}?
+          <DialogContentText id="confirm-deletion-dialog-description">
+            Are you sure you want to delete customer "{customerToDelete?.name}"?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDeleteCancel} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleDeleteConfirm} color="secondary" autoFocus>
-            Confirm
-          </Button>
+         <DialogActions>
+  <Button
+    onClick={handleDeleteCancel}
+    style={{
+      backgroundColor: 'rgb(255,255,255)', // Blue color for Cancel button
+      color: 'bule',
+      '&:hover': {
+        backgroundColor: 'rgb(0, 80, 150)', // Darker blue on hover
+      },
+    }}
+  >
+    Cancel
+  </Button>
+  <Button
+    onClick={handleDeleteConfirm}
+    style={{
+      backgroundColor: 'rgb(255,255,255)', // Red color for Confirm button
+      color: 'red',
+      '&:hover': {
+        backgroundColor: 'rgb((255,255,255)', // Darker red on hover
+      },
+    }}
+  >
+    Confirm
+  </Button>
+</DialogActions>
+
         </DialogActions>
       </Dialog>
-      
     </div>
-    
   );
 }
 

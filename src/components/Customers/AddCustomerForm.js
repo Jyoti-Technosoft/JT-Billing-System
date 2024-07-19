@@ -10,7 +10,6 @@ import {
   Grid,
   Paper
 } from '@mui/material';
-
 const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -25,7 +24,6 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
-
   useEffect(() => {
     if (initialData) {
       setFirstName(initialData.firstName || '');
@@ -39,7 +37,6 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
       setEmail(initialData.email || '');
     }
   }, [initialData]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateInputs()) {
@@ -62,7 +59,6 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
     setCustomerAdded(true);
     resetFormFields();
   };
-
   const validateInputs = () => {
     let isValid = true;
     if (!/^[a-zA-Z]+$/.test(firstName)) {
@@ -85,7 +81,6 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
     }
     return isValid;
   };
-
   const resetFormFields = () => {
     setFirstName('');
     setLastName('');
@@ -97,34 +92,49 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
     setAddress('');
     setEmail('');
   };
-
+  const modalContentStyle = {
+    width: '100%',
+    fontFamily: "'Poppins', sans-serif",
+    position: 'relative',
+    transform: 'scale(0.9)', // Initial scale
+    transition: 'transform 0.3s ease', // Add transition effect
+    overflow: 'hidden' // Add overflow hidden to prevent content from overflowing
+  };
   return (
+    <div style={modalContentStyle}>
     <Paper elevation={4} sx={{ p: 4, bgcolor: 'white', borderRadius: 4, boxShadow: 3 }}>
       <Typography variant="h4" component="h2" gutterBottom>
         {initialData ? 'Edit Customer' : 'Add New Customer'}
       </Typography>
+      <hr/>
       {formError && <Typography color="error">{formError}</Typography>}
       {customerAdded && <Typography color="success">Customer added successfully!</Typography>}
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <TextField
+          <TextField
               fullWidth
-              id="first-name"
+              id="outlined-multiline-flexible"
               label="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               variant="outlined"
-              
               required
               error={!!firstNameError}
               helperText={firstNameError}
+              sx={{
+                      '& .MuiOutlinedInput-root': {
+                      '& input': {
+                      border: 'none',
+                        },
+                      },
+                  }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              id="last-name"
+              id="outlined-multiline-flexible"
               label="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -132,6 +142,13 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
               required
               error={!!lastNameError}
               helperText={lastNameError}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -184,6 +201,13 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
               value={gstNumber}
               onChange={(e) => setGstNumber(e.target.value)}
               variant="outlined"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -194,6 +218,13 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               variant="outlined"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -204,7 +235,14 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               variant="outlined"
-            />
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
+            /><hr/>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -214,7 +252,14 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               variant="outlined"
-            />
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& input': {
+                    border: 'none',
+                  },
+                },
+              }}
+            /> <hr/>
           </Grid>
           <Grid container justifyContent="flex-end" spacing={2} sx={{paddingTop:"15px"  }}>
   <Grid item>
@@ -234,7 +279,7 @@ const AddCustomerForm = ({ onClose, onSubmit, initialData }) => {
         </Grid>
       </form>
     </Paper>
+    </div>
   );
 };
-
 export default AddCustomerForm;

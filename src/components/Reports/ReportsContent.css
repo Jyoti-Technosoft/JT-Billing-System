@@ -1,7 +1,36 @@
+
+
+.button {
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #1f67e5; /* Primary color */
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+  background-color: #145bb7; /* Darker shade for hover */
+  transform: translateY(-2px);
+}
+
+.button:disabled {
+  background-color: #b0c4de; /* Disabled state color */
+  cursor: not-allowed;
+}
+
+/* Main Content Styles */
 .main-content {
-  padding: 20px;
-  background-color: #f4f6f8;
-  border-radius: 8px;
+  padding: 18px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: rgb(18, 30, 46);
+  border-radius: 20px;
+  color: rgb(31, 103, 229);
 }
 
 .header {
@@ -24,7 +53,16 @@
 
 .pie-chart, .bar-chart {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.pie-chart:hover, .bar-chart:hover {
+  transform: translateY(-5px);
 }
 
 .profit-loss, .daily-sales, .product-sales {
@@ -34,17 +72,8 @@
 .product-sales {
   margin-bottom: 20px;
 }
+
 .chart-paper {
   height: 650px; /* Adjust height as needed */
   padding: 20px; /* Optional: Add padding for spacing */
-}
-.pie-chart, .bar-chart {
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #FFFFFF;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-.pie-chart:hover, .bar-chart:hover {
-  transform: translateY(-5px);
 }

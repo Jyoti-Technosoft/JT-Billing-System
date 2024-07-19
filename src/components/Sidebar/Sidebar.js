@@ -23,38 +23,35 @@ function Sidebar() {
 
   return (
     <div className="sidebar" style={{ backgroundColor: themeStyles.sidebarBgColor, borderColor: themeStyles.sidebarBorderColor }}>
-      <div className="sidebar-header">
-        {/* Add your header content here */}
-      </div>
       <ul>
         <li>
-          <NavLink to="/dashboard" activeClassName="active">
-            <Dashboard className="sidebar-icon" style={{ color: themeStyles.color }} /> Dashboard
+          <NavLink to="/dashboard" activeClassName="active" exact>
+            <Dashboard className="sidebar-icon" style={{ color: '#ffffff' }} /> Dashboard
           </NavLink>
         </li>
         <li>
           <NavLink to="/customers" activeClassName="active">
-            <People className="sidebar-icon" style={{ color: themeStyles.color }} /> Customers
+            <People className="sidebar-icon" style={{ color: '#ffffff' }} /> Customers
           </NavLink>
         </li>
         <li>
           <NavLink to="/products" activeClassName="active">
-            <Store className="sidebar-icon" style={{ color: themeStyles.color }} /> Products
+            <Store className="sidebar-icon" style={{ color: '#ffffff' }} /> Products
           </NavLink>
         </li>
         <li>
           <NavLink to="/invoices" activeClassName="active">
-            <Receipt className="sidebar-icon" style={{ color: themeStyles.color }} /> Invoices
+            <Receipt className="sidebar-icon" style={{ color: '#ffffff' }} /> Invoices
           </NavLink>
         </li>
         <li>
           <NavLink to="/quickbilling" activeClassName="active">
-            <FlashOn className="sidebar-icon" style={{ color: themeStyles.color }} /> QuickBilling
+            <FlashOn className="sidebar-icon" style={{ color: '#ffffff' }} /> QuickBilling
           </NavLink>
         </li>
         <li>
           <NavLink to="/reports" activeClassName="active">
-            <BarChart className="sidebar-icon" style={{ color: themeStyles.color }} /> Reports
+            <BarChart className="sidebar-icon" style={{ color: '#ffffff' }} /> Reports
           </NavLink>
         </li>
       </ul>

@@ -20,10 +20,17 @@ import './ProductsContent.css'; // Ensure this import is correct
 import AddProductForm from './AddProductForm';
 import DeleteConfirmationDialog from '../DeleteConfirmationDialog/DeleteConfirmationDialog';
 
-
 function generateProductId() {
   const randomId = Math.floor(1000 + Math.random() * 9000); // Generate a random 4-digit number
   return `P-${randomId}`;
+}
+
+function calculateSellingPrice(price, percentage) {
+  return price * (1 + percentage / 100); // Price increased by the given percentage
+}
+
+function calculateProfit(sellingPrice, price) {
+  return sellingPrice - price;
 }
 
 function ProductsContent() {
@@ -100,7 +107,6 @@ function ProductsContent() {
     setShowAddForm(false);
     setEditingProduct(null);
     setSuccessMessage(successMsg);
-
     setTimeout(() => {
       setSuccessMessage('');
     }, 3000);
@@ -129,137 +135,141 @@ function ProductsContent() {
   const handleConfirmDelete = () => {
     const updatedProducts = products.filter((product) => product.id !== productIdToDelete);
     const deletedProduct = products.find((product) => product.id === productIdToDelete);
-
     setProducts(updatedProducts);
     setFilteredProducts(updatedProducts);
     setDeletionMessage(`Product ${deletedProduct.name} deleted successfully!`);
-
     handleCloseDeleteDialog();
-
     setTimeout(() => {
       setDeletionMessage('');
     }, 3000);
   };
 
-  const calculateSellingPrice = (price, percentage) => {
-    return price * (1 + percentage / 100); // Price increased by the given percentage
+  const formatPrice = (price) => {
+    const priceNumber = Number(price);
+    return isNaN(priceNumber) ? '-' : priceNumber.toFixed(2);
   };
 
   return (
-    
-      <div className="products">
-        <Box display="flex" alignItems="center" justifyContent="space-between" >
+    <div className="products">
+      <Box display="flex" alignItems="center" justifyContent="space-between">
         <Typography variant="h4">
           <b>&ensp;Products</b>
         </Typography>
-        </Box>
-        <hr />
-        {successMessage && (
-          <Snackbar open={true} autoHideDuration={3000} onClose={() => setSuccessMessage('')}>
-            <MuiAlert elevation={6} variant="filled" severity="success" onClose={() => setSuccessMessage('')}>
-              {successMessage}
-            </MuiAlert>
-          </Snackbar>
-        )}
-
-        {deletionMessage && (
-          <Snackbar open={true} autoHideDuration={3000} onClose={() => setDeletionMessage('')}>
-            <MuiAlert elevation={6} variant="filled" severity="error" onClose={() => setDeletionMessage('')}>
-              {deletionMessage}
-            </MuiAlert>
-          </Snackbar>
-        )}
-
-        <Box display="flex" alignItems="center" mt={2}>
-          <Box className="search-box">
-            <TextField
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleSearchKeyDown}
-              variant="outlined"
-              size="small"
-              InputProps={{
-                disableUnderline: true,
-              }}
-            />
-            <Button onClick={handleSearch} variant="contained" style={{
+      </Box>
+      <hr />
+      {successMessage && (
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          onClose={() => setSuccessMessage('')}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        >
+          <MuiAlert elevation={6} variant="filled" severity="success" onClose={() => setSuccessMessage('')}>
+            {successMessage}
+          </MuiAlert>
+        </Snackbar>
+      )}
+      {deletionMessage && (
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          onClose={() => setDeletionMessage('')}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        >
+          <MuiAlert elevation={6} variant="filled" severity="error" onClose={() => setDeletionMessage('')}>
+            {deletionMessage}
+          </MuiAlert>
+        </Snackbar>
+      )}
+      <Box display="flex" alignItems="center" mt={2}>
+        <Box className="search-box">
+          <TextField
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearchKeyDown}
+            variant="outlined"
+            size="small"
+            InputProps={{
+              disableUnderline: true,
+            }}
+          />
+          <Button
+            onClick={handleSearch}
+            variant="contained"
+            style={{
               background: 'rgb(25, 118, 210)',
               color: 'white',
-            }}>
-              Search
-            </Button>
-          </Box>
-          <Box className="action-buttons">
-            <Button onClick={handleAddClick} variant="contained" color="primary" style={{
+            }}
+          >
+            Search
+          </Button>
+        </Box>
+        <Box className="action-buttons">
+          <Button
+            onClick={handleAddClick}
+            variant="contained"
+            color="primary"
+            style={{
               background: 'rgb(25, 118, 210)',
               color: 'white',
-            }}>
-              Add
-            </Button>
-          </Box>
+            }}
+          >
+            Add
+          </Button>
         </Box>
-
-        {showAddForm && (
-          <Modal onClose={handleFormClose}>
-            <AddProductForm onClose={handleFormClose} onSubmit={handleFormSubmit} initialData={editingProduct} />
-          </Modal>
-        )}
-
-        {showNoResults && <Typography variant="body1" className="no-results">No results found</Typography>}
-
-        <TableContainer style={{ maxHeight: filteredProducts.length > 100 ? '400px' : 'unset', overflow: 'auto' }}>
-          <Table stickyHeader>
-            <TableHead>
-              <TableRow>
-                <TableCell><b>Product ID</b></TableCell>
-                <TableCell><b>Product Name</b></TableCell>
-                <TableCell><b>Original Price</b></TableCell>
-                <TableCell><b>Percentage (%)</b></TableCell>
-                <TableCell><b>Selling Price</b></TableCell>
-                <TableCell><b>Total Purchase</b></TableCell>
-                <TableCell><b>Sold Out</b></TableCell>
-                <TableCell><b>Available</b></TableCell>
-                <TableCell><b>Actions</b></TableCell>
+      </Box>
+      {showAddForm && (
+        <Modal onClose={handleFormClose}>
+          <AddProductForm onClose={handleFormClose} onSubmit={handleFormSubmit} initialData={editingProduct} />
+        </Modal>
+      )}
+      {showNoResults && <Typography variant="body1" className="no-results">No results found</Typography>}
+      <TableContainer style={{ maxHeight: filteredProducts.length > 100 ? '400px' : 'unset', overflow: 'auto' }}>
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell><b>Product ID</b></TableCell>
+              <TableCell><b>Product Name</b></TableCell>
+              <TableCell><b>Original Price</b></TableCell>
+              <TableCell><b>Selling Price</b></TableCell>
+              <TableCell><b>Profit</b></TableCell>
+              <TableCell><b>Total Purchase</b></TableCell>
+              <TableCell><b>Sold Out</b></TableCell>
+              <TableCell><b>Available</b></TableCell>
+              <TableCell><b>Actions</b></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredProducts.map((product) => (
+              <TableRow key={product.id}>
+                <TableCell>{product.id}</TableCell>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>{formatPrice(product.price)}</TableCell>    
+                <TableCell>{formatPrice(calculateSellingPrice(product.price, product.sellingPricePercentage))}</TableCell>
+                <TableCell>{formatPrice(calculateProfit(calculateSellingPrice(product.price, product.sellingPricePercentage), product.price))}</TableCell>
+                <TableCell>{product.totalPurchase}</TableCell>
+                <TableCell>{product.soldOut}</TableCell>
+                <TableCell>{product.available}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleEditClick(product)} style={{ color: 'blue' }}>
+                    <MdEdit />
+                  </IconButton>
+                  <IconButton onClick={() => handleOpenDeleteDialog(product.id)} style={{ color: 'red' }}>
+                    <MdDeleteForever />
+                  </IconButton>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredProducts.map((product) => (
-                <TableRow key={product.id}>
-                  <TableCell>{product.id}</TableCell>
-                  <TableCell>{product.name}</TableCell>
-                  <TableCell>{product.price}/-</TableCell>
-                  <TableCell>{product.sellingPricePercentage}%</TableCell>
-                  <TableCell>{calculateSellingPrice(product.price, product.sellingPricePercentage)}/-</TableCell>
-                  <TableCell>{product.totalPurchase}</TableCell>
-                  <TableCell>{product.soldOut}</TableCell>
-                  <TableCell>{product.available}</TableCell>
-                  <TableCell>
-                    <Box display="flex" alignItems="center">
-                      <IconButton onClick={() => handleEditClick(product)} color="primary" style={{
-              background: 'rgb(25, 118, 210)',
-              color: 'white',
-            }}>
-                        <MdEdit />
-                      </IconButton>
-                      <IconButton onClick={() => handleOpenDeleteDialog(product.id)} style={{ color: 'red' }}>
-                        <MdDeleteForever />
-                      </IconButton>
-                    </Box>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-        <DeleteConfirmationDialog
-          open={deleteDialogOpen}
-          handleClose={handleCloseDeleteDialog}
-          handleConfirm={handleConfirmDelete}
-        />
-      </div>
-      
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <DeleteConfirmationDialog
+        open={deleteDialogOpen}
+        onClose={handleCloseDeleteDialog}
+        onConfirm={handleConfirmDelete}
+      />
+    </div>
   );
 }
 

@@ -51,12 +51,10 @@
   /* Styles for text fields in the invoice form */
   .add-invoice-form .MuiTextField-root {
     margin-bottom: 20px;
-   
   }
   /* Styles for buttons in the invoice form */
   .add-invoice-form .MuiButton-root {
     margin-top: 20px;
-    
   }
   /* Modal Backdrop */
   .modal-backdrop {
@@ -74,18 +72,7 @@
     backdrop-filter: blur(5px); /* Add blur effect to the backdrop */
   }
   /* Modal Content */
-  .modal-content {
-    
-    padding: 50px;
-    max-width: 90%;
-    width: 600px;
-    font-family: 'Poppins', sans-serif;
-    position: relative;
-    animation: fadeIn 0.3s ease forwards;
-    transform: scale(0.9); /* Initial scale */
-    transition: transform 0.3s ease; /* Add transition effect */
-    overflow: hidden; /* Add overflow hidden to prevent content from overflowing */
-  }
+  
   .modal-content.show {
     transform: scale(1); /* Scale up on show */
   }

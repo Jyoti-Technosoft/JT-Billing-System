@@ -29,6 +29,7 @@
   display: flex;
   justify-content: space-around;
   
+  
 }
 
 .dashboard-squarebox {
@@ -42,6 +43,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: rgb(18, 30, 46);
   color: white;
+  
 }
 
 /* Search bar container styles */

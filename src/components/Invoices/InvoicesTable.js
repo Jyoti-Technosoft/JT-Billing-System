@@ -88,6 +88,10 @@ function InvoicesTable() {
   const [successMessage, setSuccessMessage] = useState("");
   const [showNoResults, setShowNoResults] = useState(false);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(""); // 'success' or 'error'
+
 
   const handleSearch = () => {
     const filtered = invoices.filter((invoice) =>
@@ -112,6 +116,7 @@ function InvoicesTable() {
   const handleFormSubmit = (updatedInvoiceData) => {
     let updatedInvoices = [...invoices];
     let successMsg = "";
+   
 
     if (editingInvoice) {
       updatedInvoices = updatedInvoices.map((invoice) =>
@@ -185,22 +190,22 @@ function InvoicesTable() {
         </Box>
         <hr />
         {successMessage && (
-          <Snackbar
-            open={true}
-            autoHideDuration={3000}
-            onClose={() => setSuccessMessage("")}
-          >
-            <MuiAlert
-              elevation={6}
-              variant="filled"
-              severity="success"
-              onClose={() => setSuccessMessage("")}
-            >
-              {successMessage}
-            </MuiAlert>
-          </Snackbar>
-        )}
-
+  <Snackbar
+    open={true}
+    autoHideDuration={3000}
+    onClose={() => setSuccessMessage("")}
+    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+  >
+    <MuiAlert
+      elevation={6}
+      variant="filled"
+      severity="error"  // Change severity to 'error' for red color
+      onClose={() => setSuccessMessage("")}
+    >
+      {successMessage}
+    </MuiAlert>
+  </Snackbar>
+)}
         <Box display="flex" alignItems="center" mt={2}>
           <Box className="search-box">
             <TextField

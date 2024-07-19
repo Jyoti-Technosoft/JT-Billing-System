@@ -1,0 +1,55 @@
+.invoice-modal .modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+  }
+  .invoice-modal .modal-header,
+  .invoice-modal .modal-body,
+  .invoice-modal .modal-footer {
+    padding: 20px;
+  }
+  .invoice-modal .modal-header {
+    border-bottom: none;
+  }
+  .invoice-modal .modal-body {
+    padding: 0;
+  }
+  .invoice-modal .modal-footer {
+    border-top: none;
+    justify-content: flex-end;
+  }
+  .invoice-modal .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .invoice-modal .btn-outline-primary {
+    border-color: #2C7BE5;
+    color: #2C7BE5;
+  }
+  .invoice-modal .btn-outline-primary:hover {
+    background-color: #2C7BE5;
+    color: white;
+  }
+  .invoice-modal .fw-bold {
+    font-weight: 700;
+  }
+  .invoice-modal .text-secondary {
+    color: #6C757D;
+  }
+  .invoice-modal .bg-light {
+    background-color: #F8F9FA !important;
+  }
+  .invoice-modal .table th,
+  .invoice-modal .table td {
+    vertical-align: middle;
+  }
+  .invoice-modal .table th {
+    font-weight: bold;
+  }
+  .invoice-modal .table .text-end {
+    text-align: right;
+  }
+  .invoice-modal .bg-light.py-3.px-4.rounded {
+    background-color: #E9ECEF !important;
+    border-radius: 0.25rem;
+  }

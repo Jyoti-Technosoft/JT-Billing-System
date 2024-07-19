@@ -1,0 +1,90 @@
+/* Base.module.css */
+.register {
+  width: 400px;
+  background: white;
+  border: 1px solid #dddfe2;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  padding: 1rem;
+  align-items: center;
+  text-align: center;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.register > form input {
+  border-radius: 20px;
+  border: 2px solid lightgrey;
+  outline: none;
+  color: #1d2129;
+  margin: 2% 0;
+  width: 90%;
+  padding: 12px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register > form input:focus {
+  border-color: blue;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.25);
+}
+
+.password_container {
+  position: relative;
+  width: 90%;
+  margin: 2% 0;
+}
+
+.password_container {
+  position: relative;
+  width: 99%;
+  right: 5%;
+  margin: 2% 0;
+}
+
+.password_toggle {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.button_common {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 14px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 20px;
+  width: 90%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button_common:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.button_common:active {
+  transform: translateY(1px);
+}
+
+.button_hover:hover {
+  background-color: blue;
+}

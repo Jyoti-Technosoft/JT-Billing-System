@@ -7,22 +7,20 @@ import Products from '../Products/ProductsContent';
 import Invoices from '../Invoices/InvoicesTable';
 import Reports from '../Reports/ReportsContent';
 import './Dashboard.css';
-
 function Dashboard() {
   return (
-   
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<DashboardContent />} />
-          <Route path="dashboard" element={<DashboardContent />} />
-          <Route path="customers" element={<Customers />} />
-          <Route path="products" element={<Products />} />
-          <Route path="invoices" element={<Invoices />} />
-          <Route path="reports" element={<Reports/>} />
-        </Routes>
-      </div>
-   
+    <div id="app-container">
+    <div className="content">
+      <Routes>
+        <Route path="/" element={<DashboardContent />} />
+        <Route path="dashboard" element={<DashboardContent />} />
+        <Route path="customers" element={<Customers />} />
+        <Route path="products" element={<Products />} />
+        <Route path="invoices" element={<Invoices />} />
+        <Route path="reports" element={<Reports/>} />
+      </Routes>
+    </div>
+  </div>
   );
 }
-
 export default Dashboard;
